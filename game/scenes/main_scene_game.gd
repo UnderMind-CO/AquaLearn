@@ -23,21 +23,27 @@ var valvulas = {
 		"flujo": 5.0,  # Litros por segundo
 		"proposito": "almacenamiento",
 		"necesita_agua": 0.0,
-		"sprite_node": null
+		"sprite_node": null,
+		"nombre_display": "Válvula de Cisterna",
+		"descripcion": "Para almacenar agua"
 	},
 	"ValvulaLavado": {
 		"abierta": false,
 		"flujo": 10.0,
 		"proposito": "limpieza",
 		"necesita_agua": 0.0,
-		"sprite_node": null
+		"sprite_node": null,
+		"nombre_display": "Válvula de Lavado",
+		"descripcion": "Para tareas de limpieza"
 	},
 	"ValvulaDesague": {
 		"abierta": false,
 		"flujo": 15.0,
 		"proposito": "desague",
 		"necesita_agua": 0.0,
-		"sprite_node": null
+		"sprite_node": null,
+		"nombre_display": "Válvula de Desagüe",
+		"descripcion": "Para drenar agua (¡Cuidado!)"
 	}
 }
 
@@ -46,58 +52,84 @@ var tiempo_hasta_lluvia = 10.0
 var esta_lloviendo = false
 
 # ========== REFERENCIAS A NODOS UI ==========
-@onready var guia = $CanvasLayer2/Guia
-@onready var label_agua = $CanvasLayer2/Guia/CanvasLayer/HUD/LabelAgua
-@onready var label_puntos = $CanvasLayer2/Guia/CanvasLayer/HUD/LabelPuntos
-@onready var label_mision = $CanvasLayer2/Guia/CanvasLayer/HUD/LabelMision
-@onready var tanque_sprite = $TanqueAgua
+# Usando get_node_or_null para evitar errores si los nodos no existen aún
+@onready var guia = get_node_or_null("CanvasLayer2/Guia")
+@onready var label_agua = get_node_or_null("CanvasLayer2/Guia/CanvasLayer/HUD/LabelAgua")
+@onready var label_puntos = get_node_or_null("CanvasLayer2/Guia/CanvasLayer/HUD/LabelPuntos")
+@onready var label_mision = get_node_or_null("CanvasLayer2/Guia/CanvasLayer/HUD/LabelMision")
+@onready var tanque_sprite = get_node_or_null("TanqueAgua")
 
+# ========== LISTA DE MISIONES POSIBLES ==========
 # ========== LISTA DE MISIONES POSIBLES ==========
 var lista_misiones = [
 	{
-		"descripcion": "Riega las plantas con exactamente 25 litros",
-		"valvula": "ValvulaPlantas",  # Debe coincidir con el nombre del nodo
-		"cantidad_exacta": 25.0,
-		"margen_error": 3.0,
-		"puntos_recompensa": 50,
-		"consejo_inicial": "Las plantas necesitan agua, pero no demasiada. ¡Cuidado con no desperdiciar!",
-		"consejo_error": "¡Has usado demasiada agua! Las plantas se pueden ahogar con exceso de riego."
-	},
-	{
-		"descripcion": "Llena la cisterna con 40 litros para emergencias",
+		"descripcion": "Llena la cisterna con 35 litros para emergencias",
 		"valvula": "ValvulaCisterna",
-		"cantidad_exacta": 40.0,
+		"cantidad_exacta": 35.0,
 		"margen_error": 5.0,
 		"puntos_recompensa": 60,
-		"consejo_inicial": "Almacenar agua es inteligente, pero llena solo lo necesario.",
-		"consejo_error": "La cisterna se desbordó. Siempre calcula cuánta agua necesitas."
+		"consejo_inicial": "💧 Almacenar agua es inteligente, pero llena solo lo necesario para no desperdiciar.",
+		"consejo_error": "La cisterna se desbordó. Siempre calcula cuánta agua necesitas antes de abrir la válvula."
 	},
 	{
-		"descripcion": "Usa 30 litros para lavar el patio",
+		"descripcion": "Usa 25 litros para lavar el patio eficientemente",
 		"valvula": "ValvulaLavado",
-		"cantidad_exacta": 30.0,
+		"cantidad_exacta": 25.0,
 		"margen_error": 4.0,
 		"puntos_recompensa": 55,
-		"consejo_inicial": "Para limpiar eficientemente, usa solo el agua necesaria.",
-		"consejo_error": "¡Demasiada agua! Podrías haber usado menos para limpiar igual de bien."
+		"consejo_inicial": "🧹 Para limpiar eficientemente, usa solo el agua necesaria. ¡No desperdicies!",
+		"consejo_error": "¡Demasiada agua! Podrías haber limpiado igual de bien usando menos agua."
+	},
+	{
+		"descripcion": "Drena 20 litros de agua sucia por el desagüe",
+		"valvula": "ValvulaDesague",
+		"cantidad_exacta": 20.0,
+		"margen_error": 3.0,
+		"puntos_recompensa": 45,
+		"consejo_inicial": "🚰 A veces necesitamos drenar agua, pero hazlo con precisión para no malgastar agua limpia.",
+		"consejo_error": "Has drenado demasiada agua. El desagüe debe usarse con cuidado."
+	},
+	{
+		"descripcion": "Llena la cisterna con 50 litros para el día",
+		"valvula": "ValvulaCisterna",
+		"cantidad_exacta": 50.0,
+		"margen_error": 6.0,
+		"puntos_recompensa": 70,
+		"consejo_inicial": "💦 Una cisterna llena te da seguridad, pero no desperdicies llenándola de más.",
+		"consejo_error": "Se ha desbordado agua de la cisterna. ¡Siempre vigila el nivel!"
+	},
+	{
+		"descripcion": "Lava con solo 18 litros (modo eco)",
+		"valvula": "ValvulaLavado",
+		"cantidad_exacta": 18.0,
+		"margen_error": 3.0,
+		"puntos_recompensa": 80,
+		"consejo_inicial": "♻️ El modo eco usa menos agua. ¡Demuestra que puedes limpiar sin desperdiciar!",
+		"consejo_error": "Has gastado más agua de la necesaria. El modo eco requiere precisión."
 	}
 ]
 
 func _ready():
 	print("🌊 Juego de Conservación del Agua - Versión Mejorada")
 	conectar_valvulas()
-	iniciar_nueva_mision()
 	actualizar_interfaz()
-	mostrar_mensaje_guia("¡Bienvenido! Soy tu guía del agua. Te enseñaré a usar este recurso de manera responsable. ¡Presta atención a las misiones!", 4.0)
+	# Usar call_deferred para iniciar la misión después de que todo esté listo
+	call_deferred("iniciar_nueva_mision")
+	call_deferred("mostrar_mensaje_guia", "¡Bienvenido! Soy tu guía del agua. Te enseñaré a usar este recurso de manera responsable. ¡Presta atención a las misiones!", 5.0)
 
 func conectar_valvulas():
 	# Conectar señales de cada válvula disponible en la escena
+	print("🔍 Buscando válvulas...")
 	for valvula_nombre in valvulas.keys():
 		var valvula_node = get_node_or_null(valvula_nombre)  # Busca por el nombre exacto
 		if valvula_node:
+			print("✅ Válvula encontrada: " + valvula_nombre)
 			valvulas[valvula_nombre]["sprite_node"] = valvula_node
 			if valvula_node.has_signal("input_event"):
 				valvula_node.input_event.connect(_on_valvula_clicked.bind(valvula_nombre))
+				print("   🔗 Señal conectada correctamente")
+			else:
+				print("   ❌ ERROR: No tiene señal input_event")
 		else:
 			print("⚠️ No se encontró el nodo: " + valvula_nombre)
 
@@ -147,8 +179,10 @@ func _process(delta):
 	# ========== ACTUALIZAR INTERFAZ ==========
 	actualizar_interfaz()
 
-func _on_valvula_clicked(viewport, event, shape_idx, valvula_nombre):
+func _on_valvula_clicked(_viewport, event, _shape_idx, valvula_nombre):
+	print("🖱️ Evento detectado en: " + valvula_nombre)
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		print("👆 Click confirmado en: " + valvula_nombre)
 		toggle_valvula(valvula_nombre)
 
 func toggle_valvula(valvula_nombre):
@@ -190,7 +224,8 @@ func iniciar_nueva_mision():
 	# Resetear contadores de válvulas
 	for valvula in valvulas.values():
 		valvula["necesita_agua"] = 0.0
-		valvula["abierta"] = false
+		if valvula["abierta"]:
+			valvula["abierta"] = false
 	
 	# Seleccionar misión aleatoria
 	var mision_index = randi() % lista_misiones.size()
@@ -198,10 +233,23 @@ func iniciar_nueva_mision():
 	mision_actual["agua_usada"] = 0.0
 	mision_actual["completada"] = false
 	
-	mostrar_mensaje_guia("📋 Nueva Misión: " + mision_actual["descripcion"] + "\n\n💡 " + mision_actual["consejo_inicial"], 5.0)
+	print("📋 Nueva misión asignada: " + mision_actual["descripcion"])
+	print("🎯 Válvula objetivo: " + mision_actual["valvula"])
+	
+	# Actualizar la interfaz inmediatamente
+	actualizar_interfaz()
+	
+	# Mostrar mensaje del guía
+	if guia:
+		mostrar_mensaje_guia("📋 Nueva Misión: " + mision_actual["descripcion"] + "\n\n💡 " + mision_actual["consejo_inicial"], 6.0)
 
 func verificar_progreso_mision():
 	if mision_actual.has("valvula") and not mision_actual["completada"]:
+		# Verificar que la válvula existe en el diccionario
+		if not valvulas.has(mision_actual["valvula"]):
+			print("❌ ERROR: La válvula de la misión no existe: " + mision_actual["valvula"])
+			return
+		
 		var valvula_mision = valvulas[mision_actual["valvula"]]
 		var agua_usada = valvula_mision["necesita_agua"]
 		var objetivo = mision_actual["cantidad_exacta"]
@@ -273,22 +321,28 @@ func actualizar_interfaz():
 		var objetivo = mision_actual["cantidad_exacta"]
 		label_mision.text = "🎯 " + mision_actual["descripcion"] + "\n📊 Progreso: " + str(int(progreso)) + "/" + str(int(objetivo)) + "L"
 	
-	# Actualizar visual del tanque
-	if tanque_sprite:
-		var escala = agua_en_tanque / capacidad_maxima
-		# Aquí podrías animar el nivel del agua dentro del tanque
+	# Actualizar visual del tanque (escala removida por ahora)
+	# if tanque_sprite:
+	#     var escala = agua_en_tanque / capacidad_maxima
 
 func mostrar_mensaje_guia(mensaje, duracion = 3.0):
 	if guia:
 		var label_guia = guia.get_node_or_null("Panel/Label")
 		if label_guia:
 			label_guia.text = mensaje
+			print("💬 Guía dice: " + mensaje)
+		else:
+			print("⚠️ No se encontró Panel/Label en Guia")
+		
 		guia.visible = true
 		
-		# Ocultar después de la duración
+		# Ocultar después de la duración (solo si duracion > 0)
 		if duracion > 0:
 			await get_tree().create_timer(duracion).timeout
-			guia.visible = false
+			if guia:  # Verificar que sigue existiendo
+				guia.visible = false
+	else:
+		print("⚠️ Nodo 'Guia' no encontrado. Mensaje: " + mensaje)
 
 func game_won():
 	mostrar_mensaje_guia("🏆 ¡FELICIDADES! Completaste todas las misiones. Has demostrado ser un experto en conservación del agua.\n\n📊 Estadísticas:\n• Puntos: " + str(puntos) + "\n• Agua ahorrada: " + str(int(capacidad_maxima * 5 - agua_total_desperdiciada)) + "L\n• Errores: " + str(errores_cometidos), 0)
