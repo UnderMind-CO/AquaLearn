@@ -1,0 +1,195 @@
+[gd_scene load_steps=12 format=3 uid="uid://dsvdjk1g4ajry"]
+
+[ext_resource type="Script" uid="uid://bgsew3sjg8k1t" path="res://game/scenes/main_scene_game.gd" id="1_ieygd"]
+[ext_resource type="Texture2D" uid="uid://dn75fqojfj5dk" path="res://assets/Agua/Gotera-chargo.png" id="1_mqxrd"]
+[ext_resource type="Texture2D" uid="uid://bxv2ay2lofode" path="res://assets/tuberia/conector-tube2.png" id="2_a8f63"]
+[ext_resource type="Texture2D" uid="uid://hxv2apw6khbv" path="res://assets/Aquaplant/tank-agua.png" id="2_sv8yq"]
+[ext_resource type="Texture2D" uid="uid://ci8ke2quhe7gg" path="res://assets/Tank/tubería-larga-agua.png" id="3_a8f63"]
+[ext_resource type="Texture2D" uid="uid://5djp4adm0x7w" path="res://assets/Valvulas/valvula-3.png" id="4_ieygd"]
+[ext_resource type="Texture2D" uid="uid://b6p2gwfu0wi1" path="res://assets/Bomba de agua/bomb-water.png" id="7_ox5h3"]
+[ext_resource type="Texture2D" uid="uid://bt6pm0ve4vjgh" path="res://assets/Aquaplant/biopochito.png" id="8_ox5h3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ox5h3"]
+radius = 52.46904
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k53vo"]
+radius = 45.5
+height = 91.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k53vo"]
+radius = 38.118237
+
+[node name="Main_Scene_game" type="Node2D"]
+script = ExtResource("1_ieygd")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="Guia" type="Control" parent="CanvasLayer2"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 806.0
+offset_bottom = 533.0
+
+[node name="character" type="Sprite2D" parent="CanvasLayer2/Guia"]
+position = Vector2(125, 189)
+scale = Vector2(0.8323263, 0.8541247)
+texture = ExtResource("8_ox5h3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer2/Guia"]
+root_node = NodePath("../..")
+
+[node name="Label" type="Label" parent="CanvasLayer2/Guia"]
+layout_mode = 0
+offset_left = 234.0
+offset_top = 133.0
+offset_right = 777.0
+offset_bottom = 510.0
+
+[node name="Label2" type="Label" parent="CanvasLayer2/Guia"]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 428.0
+offset_right = 776.0
+offset_bottom = 515.0
+theme_override_colors/font_color = Color(0.6455512, 2.5629624e-06, 4.813075e-07, 1)
+theme_override_colors/font_shadow_color = Color(0.03529412, 0.023529412, 0, 0.627451)
+theme_override_font_sizes/font_size = 25
+text = "¡Bienvenido a AquaLearn!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="panelbox" type="Panel" parent="CanvasLayer2/Guia"]
+layout_mode = 0
+offset_left = 215.0
+offset_top = 115.0
+offset_right = 787.0
+offset_bottom = 530.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="CanvasLayer2/Guia"]
+
+[node name="HUD" type="Control" parent="CanvasLayer2/Guia/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LabelAgua" type="Label" parent="CanvasLayer2/Guia/CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -732.0
+offset_top = 182.0
+offset_right = -441.0
+offset_bottom = 233.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 30
+text = "💧 Agua: 80L (80%)"
+
+[node name="LabelPuntos" type="Label" parent="CanvasLayer2/Guia/CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -730.0
+offset_top = 237.0
+offset_right = -327.0
+offset_bottom = 293.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 30
+text = "⭐ Puntos: 0 | ❌ Errores: 0"
+
+[node name="LabelMision" type="Label" parent="CanvasLayer2/Guia/CanvasLayer/HUD"]
+layout_mode = 0
+offset_left = 236.0
+offset_top = 356.0
+offset_right = 561.0
+offset_bottom = 398.0
+theme_override_font_sizes/font_size = 30
+text = "🎯 Misión: Cargando..."
+
+[node name="Agua_desper" type="Label" parent="CanvasLayer2/Guia/CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -481.0
+offset_top = 10.0
+offset_right = -109.0
+offset_bottom = 72.0
+grow_horizontal = 0
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Title_HUD" type="Label" parent="CanvasLayer2/Guia/CanvasLayer"]
+offset_left = 418.0
+offset_top = 126.0
+offset_right = 588.0
+offset_bottom = 168.0
+theme_override_colors/font_color = Color(0.96306914, 0.9546005, 7.70092e-07, 1)
+theme_override_font_sizes/font_size = 30
+text = "PANEL HUD"
+
+[node name="Title_Quest" type="Label" parent="CanvasLayer2/Guia/CanvasLayer"]
+offset_left = 401.0
+offset_top = 295.0
+offset_right = 600.0
+offset_bottom = 337.0
+theme_override_colors/font_color = Color(0.94509804, 1, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "PANEL QUEST"
+
+[node name="ValvulaLavado" type="Area2D" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="ValvulaLavado"]
+offset_left = 726.0
+offset_top = 461.5
+offset_right = 1348.0
+offset_bottom = 873.5
+texture = ExtResource("3_a8f63")
+expand_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="ValvulaLavado"]
+position = Vector2(1049, 466.5)
+texture = ExtResource("4_ieygd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ValvulaLavado"]
+position = Vector2(1045.5, 435)
+shape = SubResource("CircleShape2D_ox5h3")
+
+[node name="ValvulaDesague" type="Area2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="ValvulaDesague"]
+position = Vector2(1656.5, 778)
+texture = ExtResource("7_ox5h3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ValvulaDesague"]
+position = Vector2(1626.5, 649)
+shape = SubResource("CapsuleShape2D_k53vo")
+
+[node name="ValvulaCisterna" type="Area2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="ValvulaCisterna"]
+position = Vector2(611.5, 648)
+scale = Vector2(1.5059998, 1.108)
+texture = ExtResource("2_a8f63")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ValvulaCisterna"]
+position = Vector2(684, 447)
+shape = SubResource("CircleShape2D_k53vo")
+
+[node name="TanqueAgua" type="Sprite2D" parent="."]
+position = Vector2(456, 801.00006)
+scale = Vector2(1.001634, 0.9289215)
+texture = ExtResource("2_sv8yq")
+
+[node name="Agua-Tank" type="TextureRect" parent="TanqueAgua"]
+offset_left = 77.92859
+offset_top = 48.258057
+offset_right = 233.92865
+offset_bottom = 207.25806
+texture = ExtResource("1_mqxrd")
+expand_mode = 1
