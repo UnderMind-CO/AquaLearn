@@ -24,6 +24,7 @@ script = ExtResource("1_ieygd")
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
 [node name="Guia" type="Control" parent="CanvasLayer2"]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 806.0
@@ -128,6 +129,17 @@ offset_bottom = 327.0
 theme_override_colors/font_color = Color(0.94509804, 1, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "PANEL QUEST"
+
+[node name="Tooltip" type="Label" parent="CanvasLayer2"]
+visible = false
+offset_left = 974.0
+offset_top = 186.0
+offset_right = 1080.0
+offset_bottom = 223.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Tooltip"
+autowrap_mode = 2
 
 [node name="ValvulaLavado" type="Area2D" parent="."]
 
