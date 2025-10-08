@@ -53,7 +53,7 @@ var esta_lloviendo = false
 
 # ========== REFERENCIAS A NODOS UI ==========
 # Usando get_node_or_null para evitar errores si los nodos no existen aún
-@onready var guia = get_node_or_null("CanvasLayer2/Guia")
+@onready var guia = get_node_or_null("CanvasLayer2/Guia/CanvasLayer/HUD/Guia")
 @onready var label_agua = get_node_or_null("CanvasLayer2/Guia/CanvasLayer/HUD/LabelAgua")
 @onready var label_puntos = get_node_or_null("CanvasLayer2/Guia/CanvasLayer/HUD/LabelPuntos")
 @onready var label_mision = get_node_or_null("CanvasLayer2/Guia/CanvasLayer/HUD/LabelMision")
