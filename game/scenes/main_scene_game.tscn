@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://dsvdjk1g4ajry"]
+[gd_scene load_steps=13 format=3 uid="uid://dsvdjk1g4ajry"]
 
 [ext_resource type="Script" uid="uid://bgsew3sjg8k1t" path="res://game/scenes/main_scene_game.gd" id="1_ieygd"]
 [ext_resource type="Texture2D" uid="uid://dn75fqojfj5dk" path="res://assets/Agua/Gotera-chargo.png" id="1_mqxrd"]
 [ext_resource type="Texture2D" uid="uid://bxv2ay2lofode" path="res://assets/tuberia/conector-tube2.png" id="2_a8f63"]
+[ext_resource type="Texture2D" uid="uid://bdnebaouig4r8" path="res://assets/Aquaplant/fondo_mar_segundo_panel.png" id="2_k53vo"]
 [ext_resource type="Texture2D" uid="uid://hxv2apw6khbv" path="res://assets/Aquaplant/tank-agua.png" id="2_sv8yq"]
 [ext_resource type="Texture2D" uid="uid://ci8ke2quhe7gg" path="res://assets/Tank/tubería-larga-agua.png" id="3_a8f63"]
 [ext_resource type="Texture2D" uid="uid://5djp4adm0x7w" path="res://assets/Valvulas/valvula-3.png" id="4_ieygd"]
@@ -13,13 +14,25 @@
 size = Vector2(106, 110)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k53vo"]
-size = Vector2(89, 43)
+size = Vector2(93, 43)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uqfcf"]
 size = Vector2(78, 25)
 
 [node name="Main_Scene_game" type="Node2D"]
 script = ExtResource("1_ieygd")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = -7.0
+offset_right = 1905.0
+offset_bottom = 1017.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_k53vo")
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 
@@ -162,11 +175,11 @@ shape = SubResource("RectangleShape2D_ox5h3")
 [node name="ValvulaDesague" type="Area2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="ValvulaDesague"]
-position = Vector2(1656.5, 778)
+position = Vector2(1622.5, 778.5)
 texture = ExtResource("7_ox5h3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ValvulaDesague"]
-position = Vector2(1624.5, 655.5)
+position = Vector2(1592.5, 656)
 shape = SubResource("RectangleShape2D_k53vo")
 
 [node name="ValvulaCisterna" type="Area2D" parent="."]
