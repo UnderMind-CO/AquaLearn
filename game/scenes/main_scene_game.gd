@@ -49,7 +49,7 @@ var valvulas = {
 # ========== SISTEMA DE CLIMA/RECARGA ==========
 var tiempo_hasta_lluvia = 60.0
 var esta_lloviendo = false
-var lluvia_habilitada = false  # Desactivar lluvia automática por defecto
+var lluvia_habilitada = true  
 
 # ========== REFERENCIAS A NODOS UI ==========
 @onready var guia = get_node_or_null("CanvasLayer2/Guia")
@@ -58,6 +58,7 @@ var lluvia_habilitada = false  # Desactivar lluvia automática por defecto
 @onready var label_mision = get_node_or_null("CanvasLayer2/Guia/CanvasLayer/HUD/LabelMision")
 @onready var tanque_sprite = get_node_or_null("TanqueAgua")
 @onready var tooltip_label = get_node_or_null("CanvasLayer2/Tooltip")
+@onready var mensaje_final = get_node_or_null("CanvasLayer2/Guia/Label2") 
 
 # ========== LISTA DE MISIONES POSIBLES ==========
 var lista_misiones = [
@@ -110,6 +111,11 @@ var lista_misiones = [
 
 func _ready():
 	print("🌊 Juego de Conservación del Agua - Versión Mejorada")
+	
+	# Ocultar el mensaje final al inicio
+	if mensaje_final:
+		mensaje_final.visible = false
+	
 	conectar_valvulas()
 	actualizar_interfaz()
 	call_deferred("iniciar_nueva_mision")
@@ -248,7 +254,7 @@ func iniciar_nueva_mision():
 	actualizar_interfaz()
 	
 	if guia:
-		mostrar_mensaje_guia("📋 Nueva Misión: " + mision_actual["descripcion"] + "\n\n💡 " + mision_actual["consejo_inicial"], 6.0)
+		mostrar_mensaje_guia( mision_actual["consejo_inicial"], 6.0)
 
 func verificar_progreso_mision():
 	if mision_actual.has("valvula") and not mision_actual["completada"]:
@@ -277,6 +283,11 @@ func mision_completada(exitosa):
 	
 	if exitosa:
 		puntos += mision_actual["puntos_recompensa"]
+		
+		# BONIFICACIÓN: +10 litros por misión completada exitosamente
+		agua_en_tanque += 10.0
+		agua_en_tanque = min(agua_en_tanque, capacidad_maxima)  # No exceder capacidad máxima
+		
 		var mensajes_exito = [
 			"🎉 ¡PERFECTO! ¡Sigue así! Completaste la misión de manera impecable.",
 			"⭐ ¡EXCELENTE TRABAJO! Has usado el agua de forma muy eficiente.",
@@ -285,7 +296,7 @@ func mision_completada(exitosa):
 			"🏆 ¡MAGISTRAL! Así se cuida el agua correctamente."
 		]
 		var mensaje = mensajes_exito[randi() % mensajes_exito.size()]
-		mostrar_mensaje_guia(mensaje + "\n\n+" + str(mision_actual["puntos_recompensa"]) + " puntos 🎯\nMisiones completadas: " + str(misiones_completadas), 5.0)
+		mostrar_mensaje_guia(mensaje + "\n\n🎁 BONIFICACIÓN: +10 litros de agua\n+" + str(mision_actual["puntos_recompensa"]) + " puntos 🎯\nMisiones completadas: " + str(misiones_completadas), 5.0)
 	else:
 		puntos += int(mision_actual["puntos_recompensa"] / 4)
 		agua_total_desperdiciada += valvulas[mision_actual["valvula"]]["necesita_agua"] - mision_actual["cantidad_exacta"]
@@ -337,7 +348,7 @@ func actualizar_interfaz():
 
 func mostrar_mensaje_guia(mensaje, duracion = 3.0):
 	if guia:
-		var label_guia = guia.get_node_or_null("Panel/Label")
+		var label_guia = guia.get_node_or_null("Label")
 		if label_guia:
 			label_guia.text = mensaje
 			print("💬 Guía dice: " + mensaje)

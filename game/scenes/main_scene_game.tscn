@@ -59,6 +59,7 @@ offset_right = 848.0
 offset_bottom = 413.0
 
 [node name="Label2" type="Label" parent="CanvasLayer2/Guia"]
+visible = false
 layout_mode = 0
 offset_left = 208.0
 offset_top = 42.0
@@ -69,6 +70,7 @@ theme_override_font_sizes/font_size = 30
 text = "¡Bienvenido a AquaLearn!"
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="panelbox" type="Panel" parent="CanvasLayer2/Guia"]
 layout_mode = 0
@@ -157,44 +159,44 @@ autowrap_mode = 2
 [node name="ValvulaLavado" type="Area2D" parent="."]
 
 [node name="TextureRect" type="TextureRect" parent="ValvulaLavado"]
-offset_left = 726.0
-offset_top = 461.5
-offset_right = 1348.0
-offset_bottom = 873.5
+offset_left = 785.5
+offset_top = 400.5
+offset_right = 1407.5
+offset_bottom = 812.5
 texture = ExtResource("3_a8f63")
 expand_mode = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="ValvulaLavado"]
-position = Vector2(1049, 466.5)
+position = Vector2(1108.5, 405.5)
 texture = ExtResource("4_ieygd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ValvulaLavado"]
-position = Vector2(1044, 438)
+position = Vector2(1103.5, 377)
 shape = SubResource("RectangleShape2D_ox5h3")
 
 [node name="ValvulaDesague" type="Area2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="ValvulaDesague"]
-position = Vector2(1622.5, 778.5)
+position = Vector2(1612.5, 700.5)
 texture = ExtResource("7_ox5h3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ValvulaDesague"]
-position = Vector2(1592.5, 656)
+position = Vector2(1582.5, 578)
 shape = SubResource("RectangleShape2D_k53vo")
 
 [node name="ValvulaCisterna" type="Area2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="ValvulaCisterna"]
-position = Vector2(611.5, 648)
+position = Vector2(671, 587)
 scale = Vector2(1.5059998, 1.108)
 texture = ExtResource("2_a8f63")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ValvulaCisterna"]
-position = Vector2(685, 441)
+position = Vector2(744.5, 380)
 shape = SubResource("RectangleShape2D_uqfcf")
 
 [node name="TanqueAgua" type="Sprite2D" parent="."]
-position = Vector2(456, 801.00006)
+position = Vector2(515.5, 740.00006)
 scale = Vector2(1.001634, 0.9289215)
 texture = ExtResource("2_sv8yq")
 

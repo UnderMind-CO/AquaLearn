@@ -58,16 +58,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -261.5
-offset_top = -85.0
-offset_right = 261.5
-offset_bottom = 85.0
+offset_left = -360.75
+offset_top = -84.0
+offset_right = 360.75
+offset_bottom = 176.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 10
 
 [node name="btn_play" type="Button" parent="ColorRect/VBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(0, 0.8976866, 0, 0.84313726)
@@ -75,7 +75,7 @@ theme_override_font_sizes/font_size = 20
 text = "Jugar"
 
 [node name="btn_opciones" type="Button" parent="ColorRect/VBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(0, 0.8976866, 0, 0.84313726)
@@ -83,7 +83,7 @@ theme_override_font_sizes/font_size = 20
 text = "Opciones"
 
 [node name="Btn_salir" type="Button" parent="ColorRect/VBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 70)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(0, 0.8976866, 0, 0.84313726)
@@ -92,7 +92,7 @@ theme_override_fonts/font = SubResource("FontVariation_dt0ve")
 theme_override_font_sizes/font_size = 20
 text = "Salir"
 
-[connection signal="pressed" from="ColorRect/VBoxContainer/btn_play" to="." method="_on_btn_play_pressed"]
 [connection signal="pressed" from="ColorRect/VBoxContainer/btn_play" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/btn_play" to="." method="_on_btn_play_pressed"]
 [connection signal="pressed" from="ColorRect/VBoxContainer/btn_opciones" to="." method="_on_btn_opciones_pressed"]
 [connection signal="pressed" from="ColorRect/VBoxContainer/Btn_salir" to="." method="_on_btn_salir_pressed"]
