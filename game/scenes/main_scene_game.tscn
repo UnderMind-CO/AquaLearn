@@ -74,10 +74,10 @@ autowrap_mode = 3
 
 [node name="panelbox" type="Panel" parent="CanvasLayer2/Guia"]
 layout_mode = 0
-offset_left = 183.0
-offset_top = 112.0
-offset_right = 851.0
-offset_bottom = 424.0
+offset_left = 1216.0
+offset_top = 36.0
+offset_right = 1884.0
+offset_bottom = 37.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="CanvasLayer2/Guia"]
 
@@ -96,10 +96,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -186.0
-offset_top = 182.0
-offset_right = 105.0
-offset_bottom = 233.0
+offset_left = 1001.0
+offset_top = 111.0
+offset_right = 1292.0
+offset_bottom = 162.0
 grow_horizontal = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 30
@@ -110,37 +110,40 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -184.0
-offset_top = 235.0
-offset_right = 219.0
-offset_bottom = 291.0
+offset_left = 1003.0
+offset_top = 164.0
+offset_right = 1406.0
+offset_bottom = 220.0
 grow_horizontal = 2
 theme_override_font_sizes/font_size = 30
 text = "⭐ Puntos: 0 | ❌ Errores: 0"
 
 [node name="LabelMision" type="Label" parent="CanvasLayer2/Guia/CanvasLayer/HUD"]
 layout_mode = 0
-offset_left = 190.0
-offset_top = 333.0
-offset_right = 843.0
-offset_bottom = 417.0
+offset_left = 1241.0
+offset_top = 262.0
+offset_right = 1858.0
+offset_bottom = 381.0
 theme_override_font_sizes/font_size = 30
 text = "🎯 Misión: Cargando..."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="Title_HUD" type="Label" parent="CanvasLayer2/Guia/CanvasLayer"]
-offset_left = 288.0
-offset_top = 126.0
-offset_right = 458.0
-offset_bottom = 168.0
+offset_left = 1475.0
+offset_top = 55.0
+offset_right = 1645.0
+offset_bottom = 97.0
 theme_override_colors/font_color = Color(0.96306914, 0.9546005, 7.70092e-07, 1)
 theme_override_font_sizes/font_size = 30
 text = "PANEL HUD"
 
 [node name="Title_Quest" type="Label" parent="CanvasLayer2/Guia/CanvasLayer"]
-offset_left = 271.0
-offset_top = 285.0
-offset_right = 470.0
-offset_bottom = 327.0
+offset_left = 1458.0
+offset_top = 214.0
+offset_right = 1657.0
+offset_bottom = 256.0
 theme_override_colors/font_color = Color(0.94509804, 1, 0, 1)
 theme_override_font_sizes/font_size = 30
 text = "PANEL QUEST"
@@ -192,7 +195,7 @@ scale = Vector2(1.5059998, 1.108)
 texture = ExtResource("2_a8f63")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ValvulaCisterna"]
-position = Vector2(744.5, 380)
+position = Vector2(745, 384)
 shape = SubResource("RectangleShape2D_uqfcf")
 
 [node name="TanqueAgua" type="Sprite2D" parent="."]

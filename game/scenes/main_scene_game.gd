@@ -1,8 +1,8 @@
 extends Node2D
 
 # ========== VARIABLES DEL SISTEMA DE AGUA ==========
-var agua_en_tanque = 80.0  # Litros actuales
-var capacidad_maxima = 100.0  # Litros máximos
+var agua_en_tanque = 80.0 
+var capacidad_maxima = 100.0  
 var agua_total_desperdiciada = 0.0
 var agua_total_usada_correctamente = 0.0
 
@@ -46,12 +46,12 @@ var valvulas = {
 	}
 }
 
-# ========== SISTEMA DE CLIMA/RECARGA ==========
+# ========== SISTEMA DE CLIMA ==========
 var tiempo_hasta_lluvia = 60.0
 var esta_lloviendo = false
 var lluvia_habilitada = true  
 
-# ========== REFERENCIAS A NODOS UI ==========
+
 @onready var guia = get_node_or_null("CanvasLayer2/Guia")
 @onready var label_agua = get_node_or_null("CanvasLayer2/Guia/CanvasLayer/HUD/LabelAgua")
 @onready var label_puntos = get_node_or_null("CanvasLayer2/Guia/CanvasLayer/HUD/LabelPuntos")
@@ -60,7 +60,7 @@ var lluvia_habilitada = true
 @onready var tooltip_label = get_node_or_null("CanvasLayer2/Tooltip")
 @onready var mensaje_final = get_node_or_null("CanvasLayer2/Guia/Label2") 
 
-# ========== LISTA DE MISIONES POSIBLES ==========
+# ========== LISTA DE MISIONES ==========
 var lista_misiones = [
 	{
 		"descripcion": "Llena la cisterna con 35 litros para emergencias",
@@ -110,11 +110,61 @@ var lista_misiones = [
 ]
 
 func _ready():
-	print("🌊 Juego de Conservación del Agua - Versión Mejorada")
+	print("🌊 Juego de Conservación del Agua - AquaLearn")
 	
 	# Ocultar el mensaje final al inicio
 	if mensaje_final:
 		mensaje_final.visible = false
+	
+	# ========== SOLUCIÓN: Configurar las capas de CanvasLayer correctamente ==========
+	# Establecer la capa principal (donde está el tooltip y la guía)
+	var canvas_layer_principal = get_node_or_null("CanvasLayer2")
+	if canvas_layer_principal:
+		canvas_layer_principal.layer = 5
+		print("✅ CanvasLayer2 configurado en layer 5")
+	else:
+		print("⚠️ No se encontró CanvasLayer2")
+	
+	# Establecer la capa del HUD (donde están los labels de agua, puntos y misión)
+	if guia:
+		var canvas_layer_hud = guia.get_node_or_null("CanvasLayer")
+		if canvas_layer_hud:
+			canvas_layer_hud.layer = 10  # HUD siempre visible por encima
+			print("✅ CanvasLayer del HUD configurado en layer 10")
+		else:
+			print("⚠️ No se encontró CanvasLayer dentro de Guia")
+	else:
+		print("⚠️ No se encontró el nodo Guia")
+	
+	# Asegurar que el tooltip esté en la capa más alta
+	if tooltip_label:
+		var parent = tooltip_label.get_parent()
+		if parent is CanvasLayer:
+			parent.layer = 15  # Tooltip encima de todo
+			print("✅ Tooltip configurado en layer 15")
+		else:
+			# Si tooltip_label no está directamente en un CanvasLayer,
+			# lo movemos y configuramos su z_index
+			tooltip_label.z_index = 150
+			print("✅ Tooltip z_index configurado en 150")
+	else:
+		print("⚠️ No se encontró tooltip_label")
+	
+	# Refuerzo adicional con z_index para los labels
+	if label_agua:
+		label_agua.z_index = 100
+		print("✅ LabelAgua z_index: 100")
+	if label_puntos:
+		label_puntos.z_index = 100
+		print("✅ LabelPuntos z_index: 100")
+	if label_mision:
+		label_mision.z_index = 100
+		print("✅ LabelMision z_index: 100")
+	if guia:
+		guia.z_index = 100
+		print("✅ Guia z_index: 100")
+	
+	# ========== Fin de la configuración de capas ==========
 	
 	conectar_valvulas()
 	actualizar_interfaz()
@@ -286,7 +336,7 @@ func mision_completada(exitosa):
 		
 		# BONIFICACIÓN: +10 litros por misión completada exitosamente
 		agua_en_tanque += 10.0
-		agua_en_tanque = min(agua_en_tanque, capacidad_maxima)  # No exceder capacidad máxima
+		agua_en_tanque = min(agua_en_tanque, capacidad_maxima) 
 		
 		var mensajes_exito = [
 			"🎉 ¡PERFECTO! ¡Sigue así! Completaste la misión de manera impecable.",
@@ -370,7 +420,7 @@ func game_won():
 	get_tree().paused = true
 
 func game_over():
-	print("💔 GAME OVER - Sin agua")
+	print("GAME OVER - Sin agua")
 	get_tree().paused = true
 
 func _input(event):

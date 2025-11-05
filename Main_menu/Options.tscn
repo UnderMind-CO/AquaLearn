@@ -1,0 +1,199 @@
+[gd_scene load_steps=4 format=3 uid="uid://djyrq3tcb2lwi"]
+
+[ext_resource type="Script" uid="uid://bnh28x3mg1tau" path="res://Main_menu/options.gd" id="1_fhtjt"]
+[ext_resource type="Texture2D" uid="uid://c4n57lpin3jip" path="res://assets/uceva logo/Uceva_Vertical_(png).png" id="2_pmxhr"]
+
+[sub_resource type="FontFile" id="FontFile_u0n4c"]
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/40/0/ascent = 0.0
+cache/0/40/0/descent = 0.0
+cache/0/40/0/underline_position = 0.0
+cache/0/40/0/underline_thickness = 0.0
+cache/0/40/0/scale = 1.0
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fhtjt")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(3.4894794e-07, 0.17802706, 0.21203113, 1)
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color(0.972549, 0.67058825, 0.7294118, 1)
+self_modulate = Color(0.29803923, 0.29803923, 0.29803923, 0.25490198)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -839.0
+offset_top = -452.5
+offset_right = 837.0
+offset_bottom = 452.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Titulo" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = SubResource("FontFile_u0n4c")
+theme_override_font_sizes/font_size = 40
+text = "OPCIONES"
+horizontal_alignment = 1
+
+[node name="credits" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -276.5
+offset_top = -146.0
+offset_right = 276.5
+offset_bottom = -96.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 5
+size_flags_vertical = 4
+size_flags_stretch_ratio = 4.16
+theme_override_font_sizes/font_size = 35
+text = "Creditos"
+flat = true
+autowrap_mode = 2
+icon_alignment = 1
+
+[node name="SourceCode" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -278.0
+offset_top = -25.0
+offset_right = 278.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 5
+size_flags_vertical = 4
+size_flags_stretch_ratio = 4.16
+theme_override_font_sizes/font_size = 35
+text = "Source Code"
+flat = true
+autowrap_mode = 2
+icon_alignment = 1
+
+[node name="Cerrar" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -279.0
+offset_top = 100.0
+offset_right = 279.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 5
+size_flags_vertical = 4
+size_flags_stretch_ratio = 4.16
+theme_override_font_sizes/font_size = 35
+text = "Cerrar"
+flat = true
+autowrap_mode = 2
+icon_alignment = 1
+
+[node name="Window" type="Window" parent="."]
+oversampling_override = 1.0
+title = "Creditos"
+position = Vector2i(448, 36)
+size = Vector2i(900, 750)
+visible = false
+content_scale_mode = 2
+content_scale_aspect = 1
+
+[node name="TextureRect" type="TextureRect" parent="Window"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -274.0
+offset_top = -186.0
+offset_right = 1022.0
+offset_bottom = 413.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_pmxhr")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Window"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 199.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 25
+bbcode_enabled = true
+text = "[center][font_size=32][b]AQUAPLANT[/b][/font_size][/center]
+
+[center][i]Juego educativo sobre el cuidado del agua[/i][/center]
+[br]
+[b][font_size=25]Equipo de desarrollo[/font_size]:[/b]
+[br]
+Esteban Lozano J.
+Jhoan David Naranjo
+
+Este proyecto nació del entusiasmo por crear, aprender y desafiar los límites del código y la iniciativa de generar conciencia sobre el cuidado del agua.
+Cada línea, cada sprite y cada mecánica son el reflejo de horas de dedicación, café y la firme intención de hacer algo que nos apasione.
+[i]
+[center]Gracias por jugar.
+Tu tiempo y curiosidad dan sentido a este esfuerzo.[/center][/i]
+"
+scroll_following = true
+scroll_following_visible_characters = true
+autowrap_mode = 2
+context_menu_enabled = true
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Panel/credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="Panel/SourceCode" to="." method="_on_source_code_pressed"]
+[connection signal="pressed" from="Panel/Cerrar" to="." method="_on_cerrar_pressed"]
+[connection signal="close_requested" from="Window" to="." method="_on_window_close_requested"]
+[connection signal="visibility_changed" from="Window" to="." method="_on_window_visibility_changed"]
